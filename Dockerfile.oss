@@ -1,4 +1,4 @@
-FROM nginx:1.21.3
+FROM docker.io/nginxinc/nginx-unprivileged:1.21.3
 
 ENV NGINX_VERSION "1.21.3"
 
@@ -7,6 +7,8 @@ ENV NGINX_VERSION "1.21.3"
 # 2. Adding a directory for proxied objects to be stored
 # 3. Replacing the entrypoint script with a modified version that explicitly
 #    sets resolvers.
+
+USER 0
 
 COPY common/etc /etc
 COPY common/docker-entrypoint.sh /docker-entrypoint.sh
@@ -18,3 +20,5 @@ RUN set -eux \
     mkdir -p /var/cache/nginx/s3_proxy; \
     chown nginx:nginx /var/cache/nginx/s3_proxy; \
     chmod -R -v +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh
+
+USER 101

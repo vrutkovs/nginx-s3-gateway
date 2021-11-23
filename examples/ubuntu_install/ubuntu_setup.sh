@@ -227,7 +227,7 @@ user  nginx;
 worker_processes  auto;
 
 error_log  /var/log/nginx/error.log notice;
-pid        /var/run/nginx.pid;
+pid        /tmp/nginx.pid;
 
 # NJS module used for implementing S3 authentication
 load_module modules/ngx_http_js_module.so;

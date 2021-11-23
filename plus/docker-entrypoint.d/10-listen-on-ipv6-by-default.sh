@@ -37,7 +37,7 @@ fi
 touch /$DEFAULT_CONF_FILE 2>/dev/null || { echo >&3 "$ME: error: can not modify /$DEFAULT_CONF_FILE (read-only file system?)"; exit 0; }
 
 # check if the file is already modified, e.g. on a container restart
-grep -q "listen  \[::]\:80;" /$DEFAULT_CONF_FILE && { echo >&3 "$ME: error: IPv6 listen already enabled"; exit 0; }
+grep -q "listen  \[::]\:8080;" /$DEFAULT_CONF_FILE && { echo >&3 "$ME: error: IPv6 listen already enabled"; exit 0; }
 
 if [ -f "/etc/os-release" ]; then
     . /etc/os-release
@@ -70,7 +70,7 @@ case "$ID" in
 esac
 
 # enable ipv6 on default.conf listen sockets
-sed -i -E 's,listen       80;,listen       80;\n    listen  [::]:80;,' /$DEFAULT_CONF_FILE
+sed -i -E 's,listen       8080;,listen       8080;\n    listen  [::]:8080;,' /$DEFAULT_CONF_FILE
 
 echo >&3 "$ME: Enabled listen on IPv6 in /$DEFAULT_CONF_FILE"
 

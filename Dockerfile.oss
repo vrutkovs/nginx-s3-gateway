@@ -19,6 +19,8 @@ RUN set -eux \
     export DEBIAN_FRONTEND=noninteractive; \
     mkdir -p /var/cache/nginx/s3_proxy; \
     chown nginx:nginx /var/cache/nginx/s3_proxy; \
-    chmod -R -v +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh
+    chmod -R -v +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh; \
+    chown nginx:root /etc/nginx/conf.d; \
+    chmod -R -v g+w /etc/nginx/conf.d
 
 USER 101
